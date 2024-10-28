@@ -1,155 +1,148 @@
-## Lab 2: Exploring Ad-Hoc Commands
-
-1. **Update Ansible Hosts File:**
-    - Edit the hosts file to include localhost and set the connection as local:
-    ```sh
-    sudo vi /etc/ansible/hosts
-    ```
-    - Add the following line by pressing `INSERT`:
-    ```plaintext
-    localhost ansible_connection=local
-    ```
-    - Save the file using `ESCAPE + :wq!`.
-
-    > **Note:** In real-life scenarios, Ansible control node can also be used as a Managed node, It’s a convenient way to perform local operations, test playbooks, and manage the local system itself. you can include `localhost` in the hosts inventory file.
-
-2. **Get Memory Details:**
-    - Run the following ad-hoc command to get memory details of the hosts:
-    ```sh
-    ansible all -m command -a "free -h"
-    ```
-    - Alternatively:
-    ```sh
-    ansible all -a "free -h"
-    ```
-
-3. **Create a User on All Nodes:**
-    - Create a user named `ansible-new` on all nodes, including the control node:
-    ```sh
-    ansible all -m user -a "name=ansible-new" --become
-    ```
-
-4. **Check for New User:**
-    - List all users on `node1` to verify that `ansible-new` is present:
-    ```sh
-    ansible node1 -a "cat /etc/passwd"
-    ```
-
-5. **List Directories in /home:**
-    - Ensure the directory `ansible-new` is present in `/home` on `node2`:
-    ```sh
-    ansible node2 -a "ls /home"
-    ```
-
-6. **Change Permissions:**
-    - Change the permission mode of the new home directory to `755`:
-    ```sh
-    ansible node1 -m file -a "dest=/home/ansible-new mode=755" --become
-    ```
-
-7. **Verify Permissions:**
-    - Check if the permissions have been updated:
-    ```sh
-    ansible node1 -a "sudo ls -l /home"
-    ```
-
-8. **Create a File in New Directory:**
-    - Create a new file named `demo.txt` in `/home/ansible-new/` on `node1`:
-    ```sh
-    ansible node1 -m file -a "dest=/home/ansible-new/demo.txt mode=600 state=touch" --become
-    ```
-
-9. **Verify File Creation:**
-    - Check if `demo.txt` was created successfully:
-    ```sh
-    ansible node1 -a "sudo ls -l /home/ansible-new/"
-    ```
-
-10. **Add Content to File:**
-    - Add a line of text to `demo.txt`:
-    ```sh
-    ansible node1 -b -m lineinfile -a 'dest=/home/ansible-new/demo.txt line="This server is managed by Ansible"'
-    ```
-
-11. **Verify Content Addition:**
-    - Check the content of `demo.txt` to confirm the line was added:
-    ```sh
-    ansible node1 -a "sudo cat /home/ansible-new/demo.txt"
-    ```
-
-12. **Remove Line from File:**
-    - Remove the added line from `demo.txt`:
-    ```sh
-    ansible node1 -b -m lineinfile -a 'dest=/home/ansible-new/demo.txt line="This server is managed by Ansible" state=absent'
-    ```
-
-13. **Verify Line Removal:**
-    - Check the content of `demo.txt` to confirm the line was removed:
-    ```sh
-    ansible node1 -b -a "sudo cat /home/ansible-new/demo.txt"
-    ```
-
-14. **Copy File to Managed Node:**
-    - Create a file `test.txt` and copy it to `/home/ansible-new/` on `node1`:
-    ```sh
-    touch test.txt
-    echo "This file will be copied to managed node using copy module" >> test.txt
-    ansible node1 -m copy -a "src=test.txt dest=/home/ansible-new/test" -b
-    ```
-
-15. **Verify File Copy:**
-    - Check if `test.txt` was copied successfully:
-    ```sh
-    ansible node1 -b -a "sudo ls -l /home/ansible-new/test"
-    ```
-
-16. **Remove Localhost Entry:**
-    - Edit the hosts file to remove the localhost entry:
-    ```sh
-    sudo vi /etc/ansible/hosts
-    ```
-    - Remove the line:
-    ```plaintext
-    localhost ansible_connection=local
-    ```
-    - Save the file using `ESCAPE + :wq!`.
-
-## Creating Playbook and Executing:
-
-#### 1. Create a file named `first.yml` and Copy paste the below code:
+## Lab : Exploring Ad-Hoc Commands
 
 ```
-vi first.yml
+sudo vi /etc/ansible/hosts
 ```
 
+Add the given line, by pressing "INSERT" 
+add localhost and add the connection as local so that it wont try to use ssh
 ```
----
-- name: first play
-  hosts: all
-  become: yes
-  tasks:
-    - name: create a directory
-      file:
-        path: /test
-        state: directory
-    - name: create a new file
-      file:
-        path: /test/demo.txt
-        mode: '0664'
-        state: touch
+localhost ansible_connection=local
+```
+**save the file using** `ESCAPE + :wq!`
+
+In real life situations, one of the managed node may be used as the ansible control node. In such cases, we can make it a managed node, by adding localhost in hosts inventory file.
+
+Get memory details of the hosts using the below ad-hoc command
+```
+ansible all -m command -a "free -h"
+```
+![image](https://github.com/user-attachments/assets/8f1fd295-a9df-4356-9b4e-99ee1e68b97a)
+
+
+
+```
+ansible all -a "free -h"
+```
+![image](https://github.com/user-attachments/assets/a892b7b1-218a-4dc9-b029-6f62d5bc982b)
+
+
+
+Create a user ansible-new in the 2 nodes + the control node. This creates the new user and the home directory /home/ansible-new
+```
+ansible localhost -m user -a "name=ansible-test" --become
+```
+![image](https://github.com/user-attachments/assets/db7a27a6-9372-416f-93eb-7b8894e1b87a)
+
+
+
+Lists all users in the machine. Check if ansible-new is present in the managed nodes / localhost
+```
+ansible localhost -a "cat /etc/passwd"
+```
+![image](https://github.com/user-attachments/assets/a075beb0-8202-4eba-9a08-54a58e38eafe)
+
+
+
+List all directories in /home. Ensure that directory 'ansible-new' is present in /home. 
+```
+ansible managed-node2 -a "ls /home"
+```
+![image](https://github.com/user-attachments/assets/69d6a999-fa0d-42c9-b21f-7e749337e7b6)
+
+
+
+Change the permission mode from '700' to '755' for the new home directory created for ansible-new
+```
+ansible managed-node1 -m file -a "dest=/home/ansible-new mode=755" --become
+```
+![image](https://github.com/user-attachments/assets/b342a740-592f-4411-bce0-8d00319a8e5c)
+
+
+
+Check if the permissions got changed
+```
+ansible managed-node1 -a "sudo ls -l /home"
+```
+![image](https://github.com/user-attachments/assets/5ecb2682-7a73-4a11-aad4-308c0d14b1d3)
+
+
+
+Create a new file in the new dir in node 1
+```
+ansible managed-node1 -m file -a "dest=/home/ansible-new/demo.txt mode=600 state=touch" --become
+```
+![image](https://github.com/user-attachments/assets/3d0b1f59-bfb6-4dda-8b0b-118cd5e25919)
+
+
+
+Check if the permissions got changed
+```
+ansible managed-node1 -a "sudo ls -l /home/ansible-new/"
+```
+![image](https://github.com/user-attachments/assets/506242bc-6493-4a78-808f-e7fcfd959277)
+
+
+
+
+Add content into the file
+```
+ansible managed-node1 -b -m lineinfile -a 'dest=/home/ansible-new/demo.txt line="This server is managed by Ansible"'
+```
+![image](https://github.com/user-attachments/assets/ac3389fa-9351-4cc2-ba77-6a3d5f06ad14)
+
+
+Check if the lines are added in demo.txt
+```
+ansible managed-node1 -a "sudo cat /home/ansible-new/demo.txt"
+```
+![image](https://github.com/user-attachments/assets/2434ab18-1649-4ed6-b26e-d4c4cc2b4340)
+
+
+
+You can remove the line using the parameter state=absent
+```
+ansible managed-node1 -b -m lineinfile -a 'dest=/home/ansible-new/demo.txt line="This server is managed by Ansible" state=absent'
+```
+![image](https://github.com/user-attachments/assets/17caee3f-9e82-48ee-9688-f828b2ccf53a)
+
+
+
+Check if the lines are removed from demo.txt
+```
+ansible managed-node1 -b -a "sudo cat /home/ansible-new/demo.txt"
+```
+![image](https://github.com/user-attachments/assets/aab8e28d-cf9e-44f8-bd68-63977b194737)
+
+
+
+Now copy a file from ansible-control node to host managed-node1
+```
+touch test.txt
+```
+```
+echo "This file will be copied to managed node using copy module" >> test.txt
+```
+Now Copy. --become can be replaced by -b
+```
+ansible managed-node1 -m copy -a "src=test.txt dest=/home/ansible-new/test" -b 
+```
+![image](https://github.com/user-attachments/assets/f54b80d3-616d-41ff-9b13-4562b79327af)
+
+
+Check if the file got copied to managed node.
+```
+ansible managed-node1 -b -a "sudo ls -l /home/ansible-new/test"
+```
+![image](https://github.com/user-attachments/assets/259fd58a-070b-42f4-adb7-e1ccf599a72a)
+
+```
+sudo vi /etc/ansible/hosts
 ```
 
-#### 2. Run the Playbook:
-    
-```
-ansible-playbook first.yml
-```
+Remove the below line from hosts inventory file. 
+localhost ansible_connection=local
+![image](https://github.com/user-attachments/assets/710199b0-d722-4086-87a1-fa2e88071c72)
 
-#### 3. List Files:
-Verify the files created by the playbook:
-    
-```
-ansible all -m command -a "ls -l"
-```
 
-### ============================ END of LAB ============================
+**save the file using** `ESCAPE + :wq!`
