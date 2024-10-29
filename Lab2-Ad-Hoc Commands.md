@@ -13,7 +13,7 @@ localhost ansible_connection=local
 
 In real life situations, one of the managed node may be used as the ansible control node. In such cases, we can make it a managed node, by adding localhost in hosts inventory file.
 
-### Get memory details of the hosts using the below ad-hoc command
+#### Get memory details of the hosts using the below ad-hoc command
 ```
 ansible all -m command -a "free -h"
 ```
