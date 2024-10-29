@@ -13,7 +13,7 @@ localhost ansible_connection=local
 
 In real life situations, one of the managed node may be used as the ansible control node. In such cases, we can make it a managed node, by adding localhost in hosts inventory file.
 
-#### Get memory details of the hosts using the below ad-hoc command
+### Get memory details of the hosts using the below ad-hoc command
 ```
 ansible all -m command -a "free -h"
 ```
@@ -28,7 +28,7 @@ ansible all -a "free -h"
 
 
 
-Create a user ansible-new in the 2 nodes + the control node. This creates the new user and the home directory /home/ansible-new
+### Create a user ansible-new in the 2 nodes + the control node. This creates the new user and the home directory /home/ansible-new
 ```
 ansible localhost -m user -a "name=ansible-test" --become
 ```
@@ -36,7 +36,7 @@ ansible localhost -m user -a "name=ansible-test" --become
 
 
 
-Lists all users in the machine. Check if ansible-new is present in the managed nodes / localhost
+### Lists all users in the machine. Check if ansible-new is present in the managed nodes / localhost
 ```
 ansible localhost -a "cat /etc/passwd"
 ```
@@ -44,7 +44,7 @@ ansible localhost -a "cat /etc/passwd"
 
 
 
-List all directories in /home. Ensure that directory 'ansible-new' is present in /home. 
+### List all directories in /home. Ensure that directory 'ansible-new' is present in /home. 
 ```
 ansible managed-node2 -a "ls /home"
 ```
@@ -52,7 +52,7 @@ ansible managed-node2 -a "ls /home"
 
 
 
-Change the permission mode from '700' to '755' for the new home directory created for ansible-new
+### Change the permission mode from '700' to '755' for the new home directory created for ansible-new
 ```
 ansible managed-node1 -m file -a "dest=/home/ansible-new mode=755" --become
 ```
@@ -60,7 +60,7 @@ ansible managed-node1 -m file -a "dest=/home/ansible-new mode=755" --become
 
 
 
-Check if the permissions got changed
+### Check if the permissions got changed
 ```
 ansible managed-node1 -a "sudo ls -l /home"
 ```
@@ -68,7 +68,7 @@ ansible managed-node1 -a "sudo ls -l /home"
 
 
 
-Create a new file in the new dir in node 1
+### Create a new file in the new dir in node 1
 ```
 ansible managed-node1 -m file -a "dest=/home/ansible-new/demo.txt mode=600 state=touch" --become
 ```
@@ -76,7 +76,7 @@ ansible managed-node1 -m file -a "dest=/home/ansible-new/demo.txt mode=600 state
 
 
 
-Check if the permissions got changed
+### Check if the permissions got changed
 ```
 ansible managed-node1 -a "sudo ls -l /home/ansible-new/"
 ```
@@ -85,14 +85,14 @@ ansible managed-node1 -a "sudo ls -l /home/ansible-new/"
 
 
 
-Add content into the file
+### Add content into the file
 ```
 ansible managed-node1 -b -m lineinfile -a 'dest=/home/ansible-new/demo.txt line="This server is managed by Ansible"'
 ```
 ![image](https://github.com/user-attachments/assets/ac3389fa-9351-4cc2-ba77-6a3d5f06ad14)
 
 
-Check if the lines are added in demo.txt
+### Check if the lines are added in demo.txt
 ```
 ansible managed-node1 -a "sudo cat /home/ansible-new/demo.txt"
 ```
@@ -100,7 +100,7 @@ ansible managed-node1 -a "sudo cat /home/ansible-new/demo.txt"
 
 
 
-You can remove the line using the parameter state=absent
+### You can remove the line using the parameter state=absent
 ```
 ansible managed-node1 -b -m lineinfile -a 'dest=/home/ansible-new/demo.txt line="This server is managed by Ansible" state=absent'
 ```
@@ -108,7 +108,7 @@ ansible managed-node1 -b -m lineinfile -a 'dest=/home/ansible-new/demo.txt line=
 
 
 
-Check if the lines are removed from demo.txt
+### Check if the lines are removed from demo.txt
 ```
 ansible managed-node1 -b -a "sudo cat /home/ansible-new/demo.txt"
 ```
@@ -116,7 +116,7 @@ ansible managed-node1 -b -a "sudo cat /home/ansible-new/demo.txt"
 
 
 
-Now copy a file from ansible-control node to host managed-node1
+### Copy a file from ansible-control node to host managed-node1
 ```
 touch test.txt
 ```
@@ -130,7 +130,7 @@ ansible managed-node1 -m copy -a "src=test.txt dest=/home/ansible-new/test" -b
 ![image](https://github.com/user-attachments/assets/f54b80d3-616d-41ff-9b13-4562b79327af)
 
 
-Check if the file got copied to managed node.
+### Check if the file got copied to managed node.
 ```
 ansible managed-node1 -b -a "sudo ls -l /home/ansible-new/test"
 ```
@@ -140,7 +140,7 @@ ansible managed-node1 -b -a "sudo ls -l /home/ansible-new/test"
 sudo vi /etc/ansible/hosts
 ```
 
-Remove the below line from hosts inventory file. 
+### Remove the below line from hosts inventory file. 
 localhost ansible_connection=local
 ![image](https://github.com/user-attachments/assets/710199b0-d722-4086-87a1-fa2e88071c72)
 
