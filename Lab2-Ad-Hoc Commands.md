@@ -1,4 +1,4 @@
-## Lab : Exploring Ad-Hoc Commands
+## Ad-Hoc Commands
 
 ```
 sudo vi /etc/ansible/hosts
