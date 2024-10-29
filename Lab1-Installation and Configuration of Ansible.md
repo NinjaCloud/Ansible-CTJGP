@@ -155,9 +155,9 @@ sudo vi /etc/ansible/hosts
 
 Add the prive IP addresses, by pressing "INSERT" 
 ```
-  managed-node1   ansible_ssh_host=<private-ip-managed-node1>  ansible_ssh_user=ec2-user
+managed-node1   ansible_ssh_host=<private-ip-managed-node1>  ansible_ssh_user=ec2-user
 
-  managed-node2   ansible_ssh_host=<private-ip-managed-node2>  ansible_ssh_user=ec2-user
+managed-node2   ansible_ssh_host=<private-ip-managed-node2>  ansible_ssh_user=ec2-user
  
 ```
 ![image](https://github.com/user-attachments/assets/a646936e-2b79-4da1-857f-87d6599e4ad2)
