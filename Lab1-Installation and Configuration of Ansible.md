@@ -53,7 +53,6 @@ aws configure
 | -----------------    | --------------------- |
 | 77AKIAWJXSSHRD27T6SC | 777H4Vh0U5oenKfmJ/+FEnGAmZvQLX7zTT |
 
-Install wget so that we can download playbooks from the training material repository 
 ```
 sudo yum install wget -y
 ```
