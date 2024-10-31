@@ -52,11 +52,11 @@ ansible managed-node2 -a "ls /home"
 
 
 
-### Change the permission mode from '700' to '755' for the new home directory created for ansible-new
+### Change the permission mode from '700' to '755' for the new home directory created for ansible-test
 ```
-ansible managed-node1 -m file -a "dest=/home/ansible-new mode=755" --become
+ansible localhost -m file -a "dest=/home/ansible-test mode=755" --become
 ```
-![image](https://github.com/user-attachments/assets/b342a740-592f-4411-bce0-8d00319a8e5c)
+![image](https://github.com/user-attachments/assets/f7008ede-ed7a-468f-877e-acefa148e7cb)
 
 
 
