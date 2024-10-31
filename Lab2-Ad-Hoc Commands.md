@@ -20,7 +20,7 @@ ansible all -m command -a "free -h"
 ![image](https://github.com/user-attachments/assets/8f1fd295-a9df-4356-9b4e-99ee1e68b97a)
 
 
-
+Implicit Module: When the module is not specified, Ansible uses the command module by default.
 ```
 ansible all -a "free -h"
 ```
