@@ -36,7 +36,7 @@ ansible localhost -m user -a "name=ansible-test" --become
 
 
 
-### Lists all users in the machine. Check if ansible-new is present in the managed nodes / localhost
+### Lists all users in the machine. Check if ansible-test is present. 
 ```
 ansible localhost -a "cat /etc/passwd"
 ```
