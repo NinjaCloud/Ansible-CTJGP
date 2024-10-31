@@ -44,75 +44,83 @@ ansible localhost -a "cat /etc/passwd"
 
 
 
-### List all directories in /home. Ensure that directory 'ansible-new' is present in /home. 
+### List all directories in /home. Ensure that directory 'ansible-test' is present in /home. 
 ```
 ansible managed-node2 -a "ls /home"
 ```
-![image](https://github.com/user-attachments/assets/69d6a999-fa0d-42c9-b21f-7e749337e7b6)
+![image](https://github.com/user-attachments/assets/ff6ee057-d9c4-4eaa-89f7-65d306951d0f)
 
 
 
 ### Change the permission mode from '700' to '755' for the new home directory created for ansible-test
 ```
-ansible localhost -m file -a "dest=/home/ansible-test mode=755" --become
+ansible managed-node2 -m file -a "dest=/home/ansible-test mode=755" --become
 ```
-![image](https://github.com/user-attachments/assets/f7008ede-ed7a-468f-877e-acefa148e7cb)
+![image](https://github.com/user-attachments/assets/19a68b54-0c69-44a7-a2f2-4af1daa868ff)
+
 
 
 
 ### Check if the permissions got changed
 ```
-ansible managed-node1 -a "sudo ls -l /home"
+ansible managed-node2 -a "sudo ls -l /home"
 ```
-![image](https://github.com/user-attachments/assets/5ecb2682-7a73-4a11-aad4-308c0d14b1d3)
+![image](https://github.com/user-attachments/assets/0a07f0ff-9ea7-4f65-9b15-6ce86fb21222)
+
 
 
 
 ### Create a new file in the new dir in node 1
 ```
-ansible managed-node1 -m file -a "dest=/home/ansible-new/demo.txt mode=600 state=touch" --become
+ansible managed-node1 -m file -a "dest=/home/ansible-test/demo.txt mode=600 state=touch" --become
 ```
-![image](https://github.com/user-attachments/assets/3d0b1f59-bfb6-4dda-8b0b-118cd5e25919)
+![image](https://github.com/user-attachments/assets/4ac3f703-0578-4a3c-a7e9-0583ce82cf81)
+
 
 
 
 ### Check if the permissions got changed
 ```
-ansible managed-node1 -a "sudo ls -l /home/ansible-new/"
+ansible managed-node1 -a "sudo ls -l /home/ansible-test/"
 ```
-![image](https://github.com/user-attachments/assets/506242bc-6493-4a78-808f-e7fcfd959277)
+![image](https://github.com/user-attachments/assets/f2a6cae8-d66d-4afa-863d-1a3715aa186f)
+
 
 
 
 
 ### Add content into the file
 ```
-ansible managed-node1 -b -m lineinfile -a 'dest=/home/ansible-new/demo.txt line="This server is managed by Ansible"'
+ansible managed-node1 -b -m lineinfile -a 'dest=/home/ansible-test/demo.txt line="This server is managed by Ansible"'
 ```
-![image](https://github.com/user-attachments/assets/ac3389fa-9351-4cc2-ba77-6a3d5f06ad14)
+![image](https://github.com/user-attachments/assets/67ab0482-a044-4248-8965-b3b75eaf503e)
+
 
 
 ### Check if the lines are added in demo.txt
 ```
-ansible managed-node1 -a "sudo cat /home/ansible-new/demo.txt"
+ansible managed-node1 -a "sudo cat /home/ansible-test/demo.txt"
 ```
-![image](https://github.com/user-attachments/assets/2434ab18-1649-4ed6-b26e-d4c4cc2b4340)
+![image](https://github.com/user-attachments/assets/bb29e580-b492-432e-850d-bfb2d725dc0f)
+
 
 
 
 ### You can remove the line using the parameter state=absent
 ```
-ansible managed-node1 -b -m lineinfile -a 'dest=/home/ansible-new/demo.txt line="This server is managed by Ansible" state=absent'
+ansible managed-node1 -b -m lineinfile -a 'dest=/home/ansible-test/demo.txt line="This server is managed by Ansible" state=absent'
 ```
-![image](https://github.com/user-attachments/assets/17caee3f-9e82-48ee-9688-f828b2ccf53a)
+![image](https://github.com/user-attachments/assets/960a14cf-07e6-4917-bcb8-44afe434d6fe)
+
 
 
 
 ### Check if the lines are removed from demo.txt
 ```
-ansible managed-node1 -b -a "sudo cat /home/ansible-new/demo.txt"
+ansible managed-node1 -b -a "sudo cat /home/ansible-test/demo.txt"
 ```
-![image](https://github.com/user-attachments/assets/aab8e28d-cf9e-44f8-bd68-63977b194737)
+![image](https://github.com/user-attachments/assets/69ecf6d3-2553-43df-8c7a-252b8b1e8b09)
+
 
 
 
@@ -125,23 +133,38 @@ echo "This file will be copied to managed node using copy module" >> test.txt
 ```
 Now Copy. --become can be replaced by -b
 ```
-ansible managed-node1 -m copy -a "src=test.txt dest=/home/ansible-new/test" -b 
+ansible managed-node1 -m copy -a "src=test.txt dest=/home/ansible-test/test" -b 
 ```
-![image](https://github.com/user-attachments/assets/f54b80d3-616d-41ff-9b13-4562b79327af)
+![image](https://github.com/user-attachments/assets/16cb9bba-68ee-4af7-b36a-85c68b51d942)
+
 
 
 ### Check if the file got copied to managed node.
 ```
-ansible managed-node1 -b -a "sudo ls -l /home/ansible-new/test"
+ansible managed-node1 -b -a "sudo ls -l /home/ansible-test/test"
 ```
-![image](https://github.com/user-attachments/assets/259fd58a-070b-42f4-adb7-e1ccf599a72a)
+![image](https://github.com/user-attachments/assets/9bbae2a7-1987-4c14-b815-b585cc4fad1d)
 
+
+### Delete the user on all
+```
+ansible all -m user -a "name=ansible-test state=absent" --become
+```
+![image](https://github.com/user-attachments/assets/31acd498-d35b-4491-a612-08a5f132d505)
+
+### Lists all users in the machine. Check if ansible-test has been deleted 
+```
+ansible all -a "cat /etc/passwd"
+```
+
+### Now clean up
 ```
 sudo vi /etc/ansible/hosts
 ```
+Remove the below line from hosts inventory file. 
 
-### Remove the below line from hosts inventory file. 
-localhost ansible_connection=local
+`localhost ansible_connection=local`
+
 ![image](https://github.com/user-attachments/assets/710199b0-d722-4086-87a1-fa2e88071c72)
 
 
