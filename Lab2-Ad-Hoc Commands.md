@@ -30,7 +30,7 @@ ansible all -a "free -h"
 
 ### Create a user ansible-test in the the control node. 
 ```
-ansible localhost -m user -a "name=ansible-test" --become
+ansible all -m user -a "name=ansible-test" --become
 ```
 ![image](https://github.com/user-attachments/assets/db7a27a6-9372-416f-93eb-7b8894e1b87a)
 
