@@ -28,7 +28,7 @@ ansible all -a "free -h"
 
 
 
-### Create a user ansible-new in the 2 nodes + the control node. This creates the new user and the home directory /home/ansible-new
+### Create a user ansible-test in the the control node. 
 ```
 ansible localhost -m user -a "name=ansible-test" --become
 ```
