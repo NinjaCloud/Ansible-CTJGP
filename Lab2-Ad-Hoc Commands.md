@@ -146,18 +146,24 @@ ansible managed-node1 -b -a "sudo ls -l /home/ansible-test/test"
 ![image](https://github.com/user-attachments/assets/9bbae2a7-1987-4c14-b815-b585cc4fad1d)
 
 
-### Delete the user on all
+### clean up
+Delete the users
 ```
 ansible all -m user -a "name=ansible-test state=absent" --become
 ```
-![image](https://github.com/user-attachments/assets/31acd498-d35b-4491-a612-08a5f132d505)
-
-### Lists all users in the machine. Check if ansible-test has been deleted 
+Delete the directories
 ```
-ansible all -a "cat /etc/passwd"
+ansible all -a "rm -rf /home/ansible-test" --become
+```
+Cross Verify
+```
+ansible all -a "id ansible-test"
+```
+```
+ansible all -a "ls /home"
 ```
 
-### Now clean up
+Now remove the localhost from the host file
 ```
 sudo vi /etc/ansible/hosts
 ```
