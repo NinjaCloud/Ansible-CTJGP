@@ -101,7 +101,7 @@ cp install-httpd-pb.yml uninstall-httpd-pb.yml
 vi uninstall-httpd-pb.yml
 ```
 Retain only first task. Replace 'state: latest' with 'state: absent'
-![image](https://github.com/user-attachments/assets/d6a35e3c-e9c0-47ba-afab-db5c7182f09e)
+
 
 Check if the playbook is ok
 ```
