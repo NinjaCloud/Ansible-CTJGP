@@ -1,8 +1,8 @@
-## Lab 5: Implementing Ansible Variables
+## Implementing Ansible Variables
 
 ### Task 1: Configuring Packages in Ansible Using Variables
 
-#### 1. Create the Ansible Playbook:
+#### Create the Ansible Playbook:
 
 Create a file named `implement-vars.yml` with the following content:
 
@@ -36,7 +36,7 @@ vi implement-vars.yml
         dest: '{{ destination }}'
 ```
 
-2. **Create the `index.html` File:**
+#### Create the `index.html` File:
 
 Create a file named `index.html` with the following content:
 
@@ -52,19 +52,19 @@ vi index.html
 </html>
 ```
 
-#### 3. Run the Ansible Playbook:
+#### Run the Ansible Playbook:
 
 ```sh
 ansible-playbook implement-vars.yml
 ```
 
-#### 4. Verify the Changes:
+#### Verify the Changes:
 
 - View the page using the public IP address of the VM.
 
 ### Task 2: Implementing Ansible Variables Using `--extra-vars` Option
 
-#### 1. Create a New `index1.html` File:
+#### Create a New `index1.html` File:
 
 Create a file named `index1.html` with the following content:
 
@@ -80,7 +80,7 @@ vi index1.html
 </html>
 ```
 
-#### 2. Run the Ansible Playbook with Extra Variables:
+#### Run the Ansible Playbook with Extra Variables:
 
 ```sh
 ansible-playbook implement-vars.yml --extra-vars "source=/home/ec2-user/lab5/file/index1.html"
@@ -88,7 +88,7 @@ ansible-playbook implement-vars.yml --extra-vars "source=/home/ec2-user/lab5/fil
 
 ### Task 3: Configuring Variables as a Separate File and Implementing Ansible Playbook
 
-#### 1. Create the Ansible Playbook:
+#### Create the Ansible Playbook:
 
 Create a file named `implement-vars1.yml` with the following content:
 
@@ -119,7 +119,7 @@ vi implement-vars1.yml
         dest: '{{ destination }}'
 ```
 
-#### 2. Create the Variables File:
+#### Create the Variables File:
 
 Create a file named `myvariables.yml` with the following content:
 
@@ -134,7 +134,7 @@ destination: /var/www/html/index.html
 source: /home/ec2-user/lab5/file/index.html
 ```
 
-#### 3. Create or Update the `index.html` File:
+#### Create or Update the `index.html` File:
 
 Ensure `index.html` contains:
 
@@ -150,10 +150,10 @@ vi index.html
 </html>
 ```
 
-#### 4. Run the Ansible Playbook:
+#### Run the Ansible Playbook:
 
 ```sh
 ansible-playbook implement-vars1.yml
 ```
 
-#### ============================= END of LAB  =============================
+
