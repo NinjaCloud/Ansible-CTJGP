@@ -2,8 +2,6 @@
 
 ### Task 1: Configuring Packages in Ansible Using Variables
 
-#### Create the Ansible Playbook:
-
 Create a file named `implement-vars.yml` with the following content:
 
 ```
@@ -36,8 +34,6 @@ vi implement-vars.yml
         dest: '{{ destination }}'
 ```
 
-#### Create the `index.html` File:
-
 Create a file named `index.html` with the following content:
 
 ```
@@ -52,19 +48,13 @@ vi index.html
 </html>
 ```
 
-#### Run the Ansible Playbook:
-
 ```sh
 ansible-playbook implement-vars.yml
 ```
 
-#### Verify the Changes:
-
-- View the page using the public IP address of the VM.
+View the page using the public IP address of the VM.
 
 ### Task 2: Implementing Ansible Variables Using `--extra-vars` Option
-
-#### Create a New `index1.html` File:
 
 Create a file named `index1.html` with the following content:
 
@@ -79,16 +69,12 @@ vi index1.html
   </body>
 </html>
 ```
-
-#### Run the Ansible Playbook with Extra Variables:
-
+Execute the playbook
 ```sh
 ansible-playbook implement-vars.yml --extra-vars "source=/home/ec2-user/lab5/file/index1.html"
 ```
 
 ### Task 3: Configuring Variables as a Separate File and Implementing Ansible Playbook
-
-#### Create the Ansible Playbook:
 
 Create a file named `implement-vars1.yml` with the following content:
 
@@ -119,8 +105,6 @@ vi implement-vars1.yml
         dest: '{{ destination }}'
 ```
 
-#### Create the Variables File:
-
 Create a file named `myvariables.yml` with the following content:
 
 ```
@@ -133,8 +117,6 @@ package1: httpd
 destination: /var/www/html/index.html
 source: /home/ec2-user/lab5/file/index.html
 ```
-
-#### Create or Update the `index.html` File:
 
 Ensure `index.html` contains:
 
@@ -150,7 +132,7 @@ vi index.html
 </html>
 ```
 
-#### Run the Ansible Playbook:
+Run the Ansible Playbook:
 
 ```sh
 ansible-playbook implement-vars1.yml
