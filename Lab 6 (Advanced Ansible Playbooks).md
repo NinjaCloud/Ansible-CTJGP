@@ -1,4 +1,4 @@
-## Lab 6: Advanced Ansible Playbooks
+## Inclusion
 
 ### Task 1: Including Tasks and Conditional Execution
 
