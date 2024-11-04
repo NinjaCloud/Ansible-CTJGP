@@ -151,17 +151,25 @@ Delete the users
 ```
 ansible all -m user -a "name=ansible-test state=absent" --become
 ```
+![image](https://github.com/user-attachments/assets/63cbf363-7cbb-4ab2-9cc0-032545c3dd11)
+
 Delete the directories
 ```
 ansible all -a "rm -rf /home/ansible-test" --become
 ```
+![image](https://github.com/user-attachments/assets/50171768-1b7c-4c4a-a749-fc5c9a6b927a)
+
 Cross Verify
 ```
 ansible all -a "id ansible-test"
 ```
+![image](https://github.com/user-attachments/assets/95a04f0e-e6bd-4b1f-bb44-2fc6557104de)
+
 ```
 ansible all -a "ls /home"
 ```
+![image](https://github.com/user-attachments/assets/2785dbb6-e8c5-4bfc-b5b8-d89a6ba5b181)
+
 
 Now remove the localhost from the host file
 ```
