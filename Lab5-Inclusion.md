@@ -2,7 +2,7 @@
 
 ### Task 1: Including Tasks and Conditional Execution
 
-Edit the `/etc/ansible/hosts` file to include:
+Edit the `/etc/ansible/hosts` file to include localhost
 ```
 sudo vi /etc/anisble/hosts
 ```
