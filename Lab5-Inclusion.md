@@ -51,8 +51,11 @@ ansible-playbook first.yaml
 
 ### Task 2: Conditional Task Execution
 
-1. **Create the `conditions.yml` Playbook:**
-- Create a file named `conditions.yml` with the following content:
+Create a file named `conditions.yml` 
+```
+vi conditions.yml
+```
+Add the  following content:
 ```yaml
 ---
 - name: Installing Httpd
@@ -72,7 +75,7 @@ ansible-playbook first.yaml
       when: ansible_os_family == "Ubuntu"
 ```
 
-2. **Run the `conditions.yml` Playbook:**
+Run the `conditions.yml` Playbook
 ```sh
 ansible-playbook conditions.yml
 ```
