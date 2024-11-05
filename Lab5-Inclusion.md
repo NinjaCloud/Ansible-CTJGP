@@ -20,8 +20,8 @@ vi tasks.yml
 ```
 **save the file using** `ESCAPE + :wq!`
 
-----------------------------------------------------------------------------------------
-Create another playbook named first.yaml, which has an inclusion for the earlier created task (second.yml) 
+
+Create another playbook named first.yaml, which has an inclusion for the earlier created task.
 ```
 vi first.yml
 ```
@@ -45,10 +45,10 @@ Execute the playbook named first.yaml using below command
 ```
 ansible-playbook first.yml
 ```
-------------------------------------------------------------------------------------------
-Create another playbook named third.yaml as below
+
+Create another playbook named second.yaml as below
 ```
-vi third.yml
+vi second.yml
 ```
 ```
 ---
@@ -71,9 +71,9 @@ vi third.yml
     when: out.rc == 0
 ```
 ----------------------------------------------------------------------------------
-Execute the playbook third.yaml
+Execute the playbook second.yaml
 ```
-ansible-playbook third.yml
+ansible-playbook second.yml
 ```
 
 verify the installed packages on managed node by following commands#
