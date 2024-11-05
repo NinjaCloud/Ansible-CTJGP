@@ -22,29 +22,28 @@ vi install-httpd-pb.yml
 Add the given content, by pressing "INSERT"
 ```
 ---
-- name: This play will install  web servers on all the hosts
+---
+- name: This play will install apache web servers on all the hosts
   hosts: all
   become: yes
   tasks:
-    - name: Task1 will install  using yum
+    - name: Task1 will install httpd using yum
       yum:
         name: httpd
+        #local cache of the package information available from the repositories configured on the system
         update_cache: yes
         state: latest
-
     - name: Task2 will upload custom index.html into all hosts
       copy:
         src: /home/ec2-user/ansible-labs/index.html
         dest: /var/www/html
-
-    - name: Task3 will set up attributes for the file
+    - name: Task3 will setup attributes for file
       file:
         path: /var/www/html/index.html
         owner: apache
         group: apache
-        mode: '0644'
-
-    - name: Task4 will start the httpd service
+        mode:  0644
+    - name: Task4 will start the httpd
       service:
         name: httpd
         state: started
