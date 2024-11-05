@@ -70,7 +70,6 @@ vi second.yml
     include_tasks: tasks.yml
     when: out.rc == 0
 ```
-----------------------------------------------------------------------------------
 Execute the playbook second.yaml
 ```
 ansible-playbook second.yml
