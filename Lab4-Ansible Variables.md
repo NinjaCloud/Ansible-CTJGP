@@ -51,6 +51,7 @@ vi index.html
 ```sh
 ansible-playbook implement-vars.yml
 ```
+![image](https://github.com/user-attachments/assets/54f4e704-6370-48ca-ada9-6f905a1f069c)
 
 View the page using the public IP address of the VM.
 
@@ -71,8 +72,9 @@ vi index1.html
 ```
 Execute the playbook
 ```sh
-ansible-playbook implement-vars.yml --extra-vars "source=/home/ec2-user/lab5/file/index1.html"
+ansible-playbook implement-vars.yml --extra-vars "source=/home/ec2-user/ansible-labs/index1.html"
 ```
+![image](https://github.com/user-attachments/assets/04200e41-cb53-45df-b24a-a941bf3f2e90)
 
 ### Task 3: Configuring Variables as a Separate File and Implementing Ansible Playbook
 
@@ -115,7 +117,7 @@ vi myvariables.yml
 hostname: all
 package1: httpd
 destination: /var/www/html/index.html
-source: /home/ec2-user/lab5/file/index.html
+source: /home/ec2-user/ansible-labs/index.html
 ```
 
 Ensure `index.html` contains:
@@ -138,4 +140,5 @@ Run the Ansible Playbook:
 ansible-playbook implement-vars1.yml
 ```
 
+![image](https://github.com/user-attachments/assets/044c3a98-2b17-4c1b-842d-b42828b5db4c)
 
