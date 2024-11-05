@@ -21,8 +21,6 @@ vi install-httpd-pb.yml
 ```
 Add the given content, by pressing "INSERT"
 ```
----
----
 - name: This play will install apache web servers on all the hosts
   hosts: all
   become: yes
