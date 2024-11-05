@@ -15,7 +15,7 @@ vi implement-vars.yml
     hostname: all
     package1: httpd
     destination: /var/www/html/index.html
-    source: /home/ec2-user/lab5/file/index.html  # Control node path
+    source: /home/ec2-user/ansible-labs/index.html  # Control node path
   tasks:
     - name: Install defined package
       yum:
