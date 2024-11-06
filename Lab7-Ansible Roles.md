@@ -144,10 +144,9 @@ Execute the playbook
 ```
 ansible-playbook implement-roles.yml
 ```
-Check the home page on browser. (Public DNS)
-It will show the webpage with msg "We are performing the Roles Lab"
+Check the home page on browser.It will show the webpage with msg "We are performing the Roles Lab"
 
-----------------------------------------------------------------------------------------------
+
 ### Task 2: Installing Java through Ansible Galaxy Roles galaxy
 
 Install java form ansible galaxy role from galaxy.ansible.com   
@@ -187,11 +186,3 @@ Now, check if java is installed in managed nodes.
 ```
 anible all -a "java -version"
 ```
-***********************************************************************************************************************************
-## Extra links and references
-1. Difference between ppk and pem: https://www.c-sharpcorner.com/article/difference-between-pem-and-ppk/
-2. Convert pem to ppk: https://www.youtube.com/watch?v=6OzOxjFSc90
-3. DevOps skills: https://youtube.com/shorts/4sJ_1vDdeS0?si=6mjtDStfeyo688-9
-4. Basic networking: https://www.youtube.com/watch?v=_IOZ8_cPgu8
-5. DevOps basics: https://youtube.com/playlist?list=PLy9YqdkGQ_pkrmQudUcOmroaY4txr7UP7&si=5kuN324pr8jsv4T2
-6. Cloud basics: https://youtube.com/playlist?list=PLy9YqdkGQ_plZcJl_u4S-dxB6_72kpsuS&si=pvGXPt0f37pK_NGY
