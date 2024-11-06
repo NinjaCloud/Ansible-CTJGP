@@ -56,7 +56,7 @@ Create `main.yml` for `webrole`
 cd .. && cd webrole
 ```
 ```
-vu main.yml
+vi main.yml
 ```
 ```yaml
 ---
