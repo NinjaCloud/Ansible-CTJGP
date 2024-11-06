@@ -86,8 +86,7 @@ Edit the implement-vars.yml and add the below lines just after `become`.
 vi implement-vars.yml
 ```
 ```yaml
----
-  vars_files:
+vars_files:
     - myvariables.yml
  ```
 
