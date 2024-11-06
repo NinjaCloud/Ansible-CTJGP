@@ -118,6 +118,7 @@ cd ../..
 ```
 tree
 ```
+![image](https://github.com/user-attachments/assets/ce302bb1-820a-46a5-a003-528d42a79e6c)
 
 Now change the directory to ansible directory and create the playbook as implement-roles.yml
 ```
