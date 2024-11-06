@@ -3,7 +3,9 @@
 ### Task 1: Configuring Packages in Ansible Using Variables
 
 Create a file named `implement-vars.yml` with the following content:
-
+```
+cd ~/ansible-labs/
+```
 ```
 vi implement-vars.yml
 ```
