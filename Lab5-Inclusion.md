@@ -61,17 +61,15 @@ vi second.yml
       name: [wget, curl]
       state: present
     register: out
-    ignore_errors: yes
-
+   
   - name: list result of previous task
     debug:
       msg: "{{ out.rc }}"
-    ignore_errors: yes
 
   - name: inclue task for httpd installation
     include_tasks: tasks.yml
     when: out.rc == 0
-    ignore_errors: yes
+
 ```
 Execute the playbook second.yaml
 ```
