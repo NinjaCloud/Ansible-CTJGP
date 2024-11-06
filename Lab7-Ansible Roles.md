@@ -51,7 +51,10 @@ vi index.yml
 </html>
 ```
 
-Create `main.yml` for `webrole`:
+Create `main.yml` for `webrole`
+```
+cd .. && cd webrole
+```
 ```yaml
 ---
 - name: install httpd
