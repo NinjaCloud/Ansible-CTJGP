@@ -36,7 +36,10 @@ vi main.yml
     enabled: true
 ```
 
-Create `index.html` file in `webrole`:
+Create `index.html` file in `webrole`
+```
+vi index.yml
+```
 ```html
 <html>
   <body>
