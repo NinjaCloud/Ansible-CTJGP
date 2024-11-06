@@ -80,34 +80,16 @@ ansible-playbook implement-vars.yml --extra-vars "source=/home/ec2-user/ansible-
 
 ### Task 3: Configuring Variables as a Separate File and Implementing Ansible Playbook
 
-Create a file named `implement-vars1.yml` with the following content:
+Edit the implement-vars.yml and add the below lines just after `become`.
 
 ```
 vi implement-vars1.yml
 ```
 ```yaml
 ---
-- hosts: '{{ hostname }}'
-  become: yes
   vars_files:
     - myvariables.yml
-  tasks:
-    - name: Install defined package
-      yum:
-        name: '{{ package1 }}'
-        update_cache: yes
-        state: latest
-    
-    - name: Start desired service
-      service:
-        name: '{{ package1 }}'
-        state: started
-    
-    - name: Copy required index.html to the document folder for httpd
-      copy:
-        src: '{{ source }}'
-        dest: '{{ destination }}'
-```
+ ```
 
 Create a file named `myvariables.yml` with the following content:
 
@@ -119,19 +101,18 @@ vi myvariables.yml
 hostname: all
 package1: httpd
 destination: /var/www/html/index.html
-source: /home/ec2-user/ansible-labs/index.html
+source: /home/ec2-user/ansible-labs/index2.html
 ```
 
 Ensure `index.html` contains:
 
 ```
-vi index.html
+vi index2.html
 ```
 ```html
 <html>
   <body>
-  <h1>Welcome to CloudThat</h1>
-  <h1>Welcome to variables</h1>
+  <h1>Welcome to VarsFile Lab in Ansible Training from  CloudThat</h1>
   </body>
 </html>
 ```
