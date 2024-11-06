@@ -6,7 +6,7 @@ cd ~/
 ```
 Lets uninstall httpd. After that, we will use ansible role to install it.
 ```
-ansible-playbook /home/ec2-user/ansible-labs/uninstall-apache-pb.yml
+ansible-playbook /home/ec2-user/ansible-labs/uninstall-httpd-pb.yml
 ```
 
 Install tree. A tree is a recursive directory listing program that produces a depth-indented listing of files. 
