@@ -8,6 +8,7 @@ cd ~/ansible-labs
 ```
 vi simple_webserver.yml
 ```
+```
 ---
 - name: Simple Apache Web Server Setup
   hosts: localhost
