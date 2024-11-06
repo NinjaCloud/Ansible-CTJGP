@@ -120,7 +120,7 @@ vi index2.html
 Run the Ansible Playbook:
 
 ```sh
-ansible-playbook implement-vars1.yml
+ansible-playbook implement-vars.yml
 ```
 
 ![image](https://github.com/user-attachments/assets/044c3a98-2b17-4c1b-842d-b42828b5db4c)
