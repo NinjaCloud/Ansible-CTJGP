@@ -83,7 +83,7 @@ ansible-playbook implement-vars.yml --extra-vars "source=/home/ec2-user/ansible-
 Edit the implement-vars.yml and add the below lines just after `become`.
 
 ```
-vi implement-vars1.yml
+vi implement-vars.yml
 ```
 ```yaml
 ---
@@ -98,13 +98,10 @@ vi myvariables.yml
 ```
 ```yaml
 ---
-hostname: all
-package1: httpd
-destination: /var/www/html/index.html
 source: /home/ec2-user/ansible-labs/index2.html
 ```
 
-Ensure `index.html` contains:
+Create `index2.html`
 
 ```
 vi index2.html
@@ -112,7 +109,7 @@ vi index2.html
 ```html
 <html>
   <body>
-  <h1>Welcome to VarsFile Lab in Ansible Training from  CloudThat</h1>
+  <h1>Welcome to VarsFile Lab in Ansible Training from CloudThat</h1>
   </body>
 </html>
 ```
