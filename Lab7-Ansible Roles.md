@@ -188,5 +188,6 @@ ansible-playbook implement-java.yml
 ```
 Now, check if java is installed in managed nodes.
 ```
-anible all -a "java -version"
+ansible all -a "java -version"
 ```
+![image](https://github.com/user-attachments/assets/1fa4ecc1-407f-412a-83fa-1243c9426df4)
