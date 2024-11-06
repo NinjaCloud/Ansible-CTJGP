@@ -6,54 +6,83 @@ Create the Playbook. Each task will be tagged so that you can see how tags allow
 cd ~/ansible-labs
 ```
 ```
-vi simple_webserver.yml
+vi tags.yaml
 ```
 ```
 ---
-- name: Simple Apache Web Server Setup
+- name: Task Demonstration
   hosts: localhost
   become: yes
   tasks:
-    - name: Install Apache
-      yum:
-        name: httpd
-        state: present
-      tags: install
+    - name: Check if target directory exists
+      stat:
+        path: /tmp/target_directory
+      register: target_dir
+      tags: check_directory
 
-    - name: Configure Apache Web Page
+    - name: Create directory if not present
+      file:
+        path: /tmp/target_directory
+        state: directory
+        mode: '0755'
+      when: not target_dir.stat.exists
+      tags: create_directory
+
+    - name: Copy sample file if directory exists
       copy:
-        content: "<h1>Welcome to the Apache Server!</h1>"
-        dest: /var/www/html/index.html
-      tags: configure
+        content: "This is a sample file content."
+        dest: /tmp/target_directory/sample_file.txt
+      when: target_dir.stat.exists
+      tags: copy_file
 
-    - name: Start Apache Service
-      service:
-        name: httpd
-        state: started
-      tags: start
+    - name: Check if user 'exampleuser' exists
+      command: id -u exampleuser
+      register: user_exists
+      ignore_errors: yes
+      tags: check_user
+
+    - name: Create user 'exampleuser' if not exists
+      user:
+        name: exampleuser
+        state: present
+      when: user_exists.rc != 0
+      tags: create_user
 ```
 
-To run only the install task (installing Apache) without configuring or starting the service, use:
+Run Task with check_directory Tag
 ```
-ansible-playbook simple_webserver.yml --tags "install"
+ansible-playbook independent_tasks_simple.yml --tags "check_directory"
 ```
-To create or update the HTML page without installing or starting Apache, use:
+Run Task with create_directory Tag
 ```
-ansible-playbook simple_webserver.yml --tags "configure"
+ansible-playbook independent_tasks_simple.yml --tags "create_directory"
 ```
-To start the Apache service without performing installation or configuration, use:
+Run Task with copy_file Tag
 ```
-ansible-playbook simple_webserver.yml --tags "start"
+ansible-playbook independent_tasks_simple.yml --tags "copy_file"
 ```
-You can run multiple tags by separating them with a comma. For example, to install and configure Apache (but not start it), use:
+Run Task with check_user Tag
 ```
-ansible-playbook simple_webserver.yml --tags "install,configure"
+ansible-playbook independent_tasks_simple.yml --tags "check_user"
 ```
-If you want to run all tasks except for the configuration task, you can use the --skip-tags option:
+Run Task with create_user Tag
 ```
-ansible-playbook simple_webserver.yml --skip-tags "configure"
+ansible-playbook independent_tasks_simple.yml --tags "create_user"
 ```
-If you’ve already installed and configured Apache and just want to resume starting the service, use:
+Run Multiple Tags Together
+You can run multiple tasks by combining tags in a comma-separated list.
 ```
-ansible-playbook simple_webserver.yml --start-at-task "Start Apache Service"
+ansible-playbook independent_tasks_simple.yml --tags "create_directory,copy_file"
+```
+Run check_directory, create_directory, and check_user Tasks
+```
+ansible-playbook independent_tasks_simple.yml --tags "check_directory,create_directory,check_user"
+```
+You can also skip specific tasks by using the --skip-tags option. This is useful if you want to run all tasks except certain ones.
+```
+ansible-playbook independent_tasks_simple.yml --skip-tags "check_user"
+```
+If you want to skip the first task (Check if target directory exists) and start from the Create directory if not present task, use:
+```
+ansible-playbook independent_tasks_simple.yml --start-at-task
 ```
