@@ -85,8 +85,7 @@ vi main.yml
 ```
 Verify Role Structure:
 ```sh
-cd ../..
-tree
+cd .. && tree
 ```
 
 Create the Playbook to Implement Roles (`implement-roles.yml`)
