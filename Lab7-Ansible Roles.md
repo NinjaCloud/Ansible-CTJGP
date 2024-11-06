@@ -4,7 +4,7 @@
 
 Uninstall httpd (if installed):
 ```sh
-ansible-playbook /home/ec2-user/ansible-labs/uninstall-apache-pb.yml
+ansible-playbook /home/ec2-user/ansible-labs/uninstall-httpd-pb.yml
 ```
 
 Install `tree` utility (for viewing directory structure):
