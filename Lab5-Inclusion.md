@@ -56,19 +56,20 @@ vi second.yml
   gather_facts: no
   become: yes
   tasks:
-  - name: install common packages
-    yum:
-      name: [wget, curl]
-      state: present
-    register: out
-   
-  - name: list result of previous task
-    debug:
-      msg: "{{ out.rc }}"
+    - name: install common packages
+      yum:
+        name: [wge, url]
+        state: present
+      register: out
+      ignore_errors: yes  # This will ensure the playbook continues even if the task fails
 
-  - name: inclue task for httpd installation
-    include_tasks: tasks.yml
-    when: out.rc == 0
+    - name: list result of previous task
+      debug:
+        msg: "{{ out.rc }}"
+
+    - name: include task for httpd installation
+      include_tasks: tasks.yml
+      when: out.rc != 0
 
 ```
 Execute the playbook second.yaml
