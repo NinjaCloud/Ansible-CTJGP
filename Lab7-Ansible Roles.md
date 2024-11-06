@@ -158,7 +158,7 @@ ansible-galaxy install geerlingguy.java
 This will download the geerlingguy.apache role into the default roles directory (~/.ansible/roles). You can specify a custom directory with -p
 Now change into labs directory by running below command and create YAML file
 ```
-cd /home/ec2-user/ansible-labs/
+cd /home/ec2-user/role-labs/
 ```
 ```
 vi implement-java.yml
