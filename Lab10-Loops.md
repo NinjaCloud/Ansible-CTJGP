@@ -1,4 +1,9 @@
-Task 1: Loops with Ansible Playbook
+## Loops
+
+```
+cd ~/ansible-labs
+```
+```
 vi looplab.yml
 ---
 - hosts: all
@@ -12,11 +17,14 @@ vi looplab.yml
       - userX
       - userY
       - userZ
+```
 save the file using ESCAPE + :wq!
 
 Execute the playbook
-
+```
 ansible-playbook looplab.yml
+```
 Verify if the users mentioned in the list were added by using an Ansible ad-hoc command
-
+```
 ansible all -a "tail -n 3 /etc/passwd"
+```
