@@ -55,6 +55,9 @@ Create `main.yml` for `webrole`
 ```
 cd .. && cd webrole
 ```
+```
+vu main.yml
+```
 ```yaml
 ---
 - name: install httpd
