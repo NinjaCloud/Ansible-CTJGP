@@ -87,8 +87,13 @@ Verify Role Structure:
 ```sh
 cd .. && tree
 ```
+![image](https://github.com/user-attachments/assets/2b74a95a-5a40-4a04-b263-e60dd0bcfe91)
+
 
 Create the Playbook to Implement Roles (`implement-roles.yml`)
+```
+vi implement-roles.yml
+```
 ```yaml
 ---
 - hosts: all
