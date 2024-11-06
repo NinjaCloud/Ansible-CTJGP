@@ -178,7 +178,11 @@ Before running the playbook, check if java is installed in managed nodes.
 ```
 ansible all -m command -a "java -version"
 ```
-Uou will get error. Now execute playbook from the control node
+
+You will get error. 
+![image](https://github.com/user-attachments/assets/5701d1fb-4f89-43c7-8ea1-4c76b8317250)
+
+Now execute playbook from the control node
 ```
 ansible-playbook implement-java.yml
 ```
