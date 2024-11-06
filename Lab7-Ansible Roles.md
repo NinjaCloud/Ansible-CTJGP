@@ -1,144 +1,196 @@
 ## Ansible Roles
 
-### Task 1: Implementing Ansible Roles
-
-Uninstall httpd (if installed):
-```sh
-ansible-playbook /home/ec2-user/ansible-labs/uninstall-httpd-pb.yml
+## Task 1: Implementing Ansible Roles
+```
+cd ~/
+```
+Lets uninstall httpd. After that, we will use ansible role to install it.
+```
+ansible-playbook /home/ec2-user/ansible-labs/uninstall-apache-pb.yml
 ```
 
-Install `tree` utility (for viewing directory structure):
-```sh
+Install tree. A tree is a recursive directory listing program that produces a depth-indented listing of files. 
+```
 sudo yum install tree -y
 ```
-Create Role Directories and Files
 
-```sh
+You can view your home directory structure in tree format with below command tree 
+```
+tree /home/ec2-user/ansible-labs
+```
+Lets create the code for Role labs
+```
+cd ~/
+```
+```
 mkdir role-labs && cd role-labs
-mkdir webrole dbrole && cd dbrole
+```
+
+Now inside the roles directory, create two different directories for different roles, namely webrole and dbrole. Then switch to the directory dbrole and then create tasks directory inside dbrole
+```
+mkdir webrole dbrole
+```
+```
+cd dbrole
+```
+```
 mkdir tasks
 ```
 
-Create `main.yml` for `dbrole`:
+This main.yml is the playbook which will get executed to make an effect of this role and put the below content in the main.yml file
 ```
-vi main.yml
+vi tasks/main.yml
 ```
-```yaml
+```
 ---
 - name: Install MariaDB server package
-  yum:
-    name: mariadb-server
+  yum: 
+    name: mariadb-server 
     state: present
 - name: Start MariaDB Service
-  service:
-    name: mariadb
-    state: started
+  service: 
+    name: mariadb 
+    state: started 
     enabled: true
 ```
+**save the file using** `ESCAPE + :wq!`
 
-Create `index.html` file in `webrole`
+
+Now change your directory to webrole 
 ```
-vi index.yml
+cd .. && cd webrole/
 ```
-```html
+```
+mkdir files tasks && cd files/
+```
+```
+vi index.html
+```
+```
 <html>
   <body>
-  <div align="center">
   <h1>We are performing the Roles Lab</h1>
-  <img width="50%" src="https://miro.medium.com/v2/resize:fit:678/1*MtmOHEt8ZX7s5KxV6bFSUg.png">
-  </div>
+  <img src= "https://d3ffutjd2e35ce.cloudfront.net/assets/logo1.png">
   </body>
 </html>
 ```
+**save the file using** `ESCAPE + :wq!`
 
-Create `main.yml` for `webrole`
+Then go to the task directory as below and create main.yml 
 ```
-cd .. && cd webrole
+cd .. && cd tasks/
 ```
 ```
 vi main.yml
 ```
-```yaml
+Add the given content, by pressing "INSERT" 
+```
 ---
 - name: install httpd
-  yum:
-    name: httpd
-    update_cache: yes
+  yum: 
+    name: httpd 
+    update_cache: yes 
     state: latest
 
 - name: uploading default index.html for host
   copy:
-    src: files/index.html
-    dest: /var/www/html/index.html
+     src: /home/ec2-user/role-labs/webrole/files/index.html
+     dest: /var/www/html
 
 - name: Setting up attributes for file
   file:
-    path: /var/www/html/index.html
+    path:  /var/www/html/index.html
     owner: apache
     group: apache
-    mode: 0644
+    mode:  0644
 
 - name: start httpd
   service:
-    name: httpd
-    state: started
+    name=httpd 
+    state=started
 ```
-Verify Role Structure:
-```sh
-cd .. && tree
+**save the file using** `ESCAPE + :wq!`
+
+After the creation of this file, we are done with the complete hierarchy of roles, so we will have a look at how it is exactly using tree command
 ```
-![image](https://github.com/user-attachments/assets/2b74a95a-5a40-4a04-b263-e60dd0bcfe91)
+cd ../..
+```
+```
+tree
+```
 
-
-Create the Playbook to Implement Roles (`implement-roles.yml`)
+Now change the directory to ansible directory and create the playbook as implement-roles.yml
+```
+cd /home/ec2-user/ansible-labs/role-labs/
+```
 ```
 vi implement-roles.yml
 ```
-```yaml
----
-- hosts: all
-  become: yes
-  roles:
-    - webrole
-    - dbrole
-```
 
-Execute the Playbook
-```sh
+Add the given content, by pressing "INSERT".
+```
+---
+ - hosts: all
+   become: yes 
+
+   roles:
+     - webrole
+     - dbrole
+```   
+**save the file using** `ESCAPE + :wq!`
+
+Execute the playbook
+```
 ansible-playbook implement-roles.yml
 ```
+Check the home page on browser. (Public DNS)
+It will show the webpage with msg "We are performing the Roles Lab"
 
-Check Home Page on Browser
-Access the public DNS of the managed node to view the page with the message "We are performing the Roles Lab".
+----------------------------------------------------------------------------------------------
+### Task 2: Installing Java through Ansible Galaxy Roles galaxy
 
-### Task 2: Installing Java through Ansible Galaxy Roles
+Install java form ansible galaxy role from galaxy.ansible.com   
 
-Install Java Role from Ansible Galaxy
-```sh
+Now Install the role 'geerlingguy.java' from ansible galaxy repository. 
+```
 ansible-galaxy install geerlingguy.java
 ```
-
-Create a Playbook to Install Java (`implement-java.yml`):
-```yaml
----
-- hosts: all
-  become: yes
-  roles:
-    - geerlingguy.java
+Now change into labs directory by running below command and create YAML file
+```
+cd /home/ec2-user/ansible-labs/
+```
+```
+vi implement-java.yml
 ```
 
-Check Java Installation:
-```sh
+Add the given content, by pressing "INSERT" 
+```
+---
+ - hosts: all
+   become: yes
+   roles:
+     - geerlingguy.java
+```
+save the file using "ESCAPE + :wq!"
+
+Before running the playbook, check if java is installed in managed nodes.
+```
 ansible all -m command -a "java -version"
 ```
-
-Execute the Playbook:
-```sh
+you will get error
+execute playbook from the control node
+```
 ansible-playbook implement-java.yml
 ```
-
-Verify Java Installation:
-```sh
-ansible all -a "java -version"
+Now, check if java is installed in managed nodes.
 ```
-
+anible all -a "java -version"
+```
+***********************************************************************************************************************************
+## Extra links and references
+1. Difference between ppk and pem: https://www.c-sharpcorner.com/article/difference-between-pem-and-ppk/
+2. Convert pem to ppk: https://www.youtube.com/watch?v=6OzOxjFSc90
+3. DevOps skills: https://youtube.com/shorts/4sJ_1vDdeS0?si=6mjtDStfeyo688-9
+4. Basic networking: https://www.youtube.com/watch?v=_IOZ8_cPgu8
+5. DevOps basics: https://youtube.com/playlist?list=PLy9YqdkGQ_pkrmQudUcOmroaY4txr7UP7&si=5kuN324pr8jsv4T2
+6. Cloud basics: https://youtube.com/playlist?list=PLy9YqdkGQ_plZcJl_u4S-dxB6_72kpsuS&si=pvGXPt0f37pK_NGY
