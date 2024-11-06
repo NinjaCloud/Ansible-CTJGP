@@ -20,6 +20,9 @@ mkdir tasks
 ```
 
 Create `main.yml` for `dbrole`:
+```
+vi main.yml
+```
 ```yaml
 ---
 - name: Install MariaDB server package
