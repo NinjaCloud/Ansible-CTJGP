@@ -61,6 +61,7 @@ vi second.yml
       name: [wget, curl]
       state: present
     register: out
+    ignore_errors: yes
 
   - name: list result of previous task
     debug:
