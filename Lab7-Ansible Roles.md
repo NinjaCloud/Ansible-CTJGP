@@ -147,14 +147,15 @@ ansible-playbook implement-roles.yml
 Check the home page on browser.It will show the webpage with msg "We are performing the Roles Lab"
 
 
-### Task 2: Installing Java through Ansible Galaxy Roles galaxy
+### Task 2: Installing Java through Ansible Galaxy Roles
 
-Install java form ansible galaxy role from galaxy.ansible.com   
+Install java form ansible galaxy role 
 
-Now Install the role 'geerlingguy.java' from ansible galaxy repository. 
+To download a role from Ansible Galaxy, use the ansible-galaxy install command followed by the role name. 
 ```
 ansible-galaxy install geerlingguy.java
 ```
+This will download the geerlingguy.apache role into the default roles directory (~/.ansible/roles). You can specify a custom directory with -p
 Now change into labs directory by running below command and create YAML file
 ```
 cd /home/ec2-user/ansible-labs/
