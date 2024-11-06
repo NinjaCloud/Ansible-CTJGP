@@ -1,6 +1,6 @@
 ## Lab Implementing Ansible Vault
 ```
-cd ~/ansible-labs/file/
+cd ~/ansible-labs/
 ```
 Now using the vault utility, encrypt the playbook that we created. Give the passwd of your choice
 ```
