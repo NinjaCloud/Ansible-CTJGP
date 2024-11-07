@@ -49,3 +49,5 @@ For that, do the following:
 ```
 ansible all -m shell -a "cat /etc/motd"
 ```
+![image](https://github.com/user-attachments/assets/83e7d21c-cbcc-4a9c-9786-6e9faba7a715)
+
