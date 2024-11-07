@@ -2,7 +2,7 @@
 
 Create a new directory for templates 
 ```
-mkdir templates
+cd ~/ && mkdir templates
 ```
 ```
 cd templates
