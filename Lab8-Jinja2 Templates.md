@@ -17,7 +17,7 @@ System Information:
 Operating System: {{ ansible_os_family | default('N/A') }}
 Architecture: {{ ansible_architecture | default('N/A') }}
 Distribution Version: {{ ansible_distribution | default('N/A') }}
-Environment: {{ environment | default('development') }}
+Environment: {{ testing_environment | default('development') }}
 Custom Message: Welcome to the managed system!
 ```
 
@@ -51,5 +51,6 @@ For that, do the following:
 ```
 ansible all -m shell -a "cat /etc/motd"
 ```
-![image](https://github.com/user-attachments/assets/83e7d21c-cbcc-4a9c-9786-6e9faba7a715)
+![image](https://github.com/user-attachments/assets/b44f23a5-6a3d-463d-ae4b-ffac8d189c6b)
+
 
