@@ -17,6 +17,8 @@ System Information:
 Operating System: {{ ansible_os_family | default('N/A') }}
 Architecture: {{ ansible_architecture | default('N/A') }}
 Distribution Version: {{ ansible_distribution | default('N/A') }}
+Environment: {{ environment | default('development') }}
+Custom Message: Welcome to the managed system!
 ```
 
 Now create the playbook for implementing this jinja2 template that we created
