@@ -10,6 +10,7 @@ vi tags.yaml
 ```
 ```
 ---
+---
 - name: Task Demonstration
   hosts: localhost
   become: yes
@@ -38,7 +39,8 @@ vi tags.yaml
     - name: Check if user 'exampleuser' exists
       command: id -u exampleuser
       register: user_exists
-      ignore_errors: yes
+      failed_when: user_exists.rc == 0
+      changed_when: false
       tags: check_user
 
     - name: Create user 'exampleuser' if not exists
