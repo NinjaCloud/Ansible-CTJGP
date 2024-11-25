@@ -9,8 +9,6 @@ cd ~/ansible-labs
 vi tags.yaml
 ```
 ```
----
----
 - name: Task Demonstration
   hosts: localhost
   become: yes
