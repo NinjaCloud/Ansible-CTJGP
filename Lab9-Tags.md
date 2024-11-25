@@ -81,5 +81,6 @@ ansible-playbook tags.yaml --skip-tags "create_user"
 ```
 If you want to skip the first task (Check if target directory exists) and start from the Create directory if not present task, use:
 ```
-ansible-playbook tags.yaml --start-at-task "check_user"
+ansible-playbook tags.yaml --start-at-task "Check if user 'exampleuser' exists"
+
 ```
