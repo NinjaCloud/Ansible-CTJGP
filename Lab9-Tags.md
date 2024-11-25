@@ -9,7 +9,7 @@ cd ~/ansible-labs
 vi tags.yaml
 ```
 ```
-- name: Tags Demonstration - Check Only
+- name: Tags Demonstration 
   hosts: localhost
   become: yes
   tasks:
