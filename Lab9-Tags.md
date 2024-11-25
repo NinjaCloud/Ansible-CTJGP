@@ -70,11 +70,6 @@ Run Task with create_user Tag
 ansible-playbook tags.yaml --tags "create_user"
 ```
 Run Multiple Tags Together
-You can run multiple tasks by combining tags in a comma-separated list.
-```
-ansible-playbook tags.yaml --tags "check_directory,create_directory,copy_file"
-```
-Run check_directory, create_directory, and check_user Tasks
 ```
 ansible-playbook tags.yaml --tags "check_directory,create_directory,check_user"
 ```
