@@ -51,38 +51,38 @@ vi tags.yaml
 
 Run Task with check_directory Tag
 ```
-ansible-playbook independent_tasks_simple.yml --tags "check_directory"
+ansible-playbook tags.yaml --tags "check_directory"
 ```
 Run Task with create_directory Tag
 ```
-ansible-playbook independent_tasks_simple.yml --tags "create_directory"
+ansible-playbook tags.yaml --tags "create_directory"
 ```
 Run Task with copy_file Tag
 ```
-ansible-playbook independent_tasks_simple.yml --tags "copy_file"
+ansible-playbook tags.yaml --tags "copy_file"
 ```
 Run Task with check_user Tag
 ```
-ansible-playbook independent_tasks_simple.yml --tags "check_user"
+ansible-playbook tags.yaml --tags "check_user"
 ```
 Run Task with create_user Tag
 ```
-ansible-playbook independent_tasks_simple.yml --tags "create_user"
+ansible-playbook tags.yaml --tags "create_user"
 ```
 Run Multiple Tags Together
 You can run multiple tasks by combining tags in a comma-separated list.
 ```
-ansible-playbook independent_tasks_simple.yml --tags "create_directory,copy_file"
+ansible-playbook tags.yaml --tags "create_directory,copy_file"
 ```
 Run check_directory, create_directory, and check_user Tasks
 ```
-ansible-playbook independent_tasks_simple.yml --tags "check_directory,create_directory,check_user"
+ansible-playbook tags.yaml --tags "check_directory,create_directory,check_user"
 ```
 You can also skip specific tasks by using the --skip-tags option. This is useful if you want to run all tasks except certain ones.
 ```
-ansible-playbook independent_tasks_simple.yml --skip-tags "check_user"
+ansible-playbook tags.yaml --skip-tags "check_user"
 ```
 If you want to skip the first task (Check if target directory exists) and start from the Create directory if not present task, use:
 ```
-ansible-playbook independent_tasks_simple.yml --start-at-task
+ansible-playbook tags.yaml --start-at-task
 ```
