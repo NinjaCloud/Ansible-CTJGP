@@ -9,76 +9,55 @@ cd ~/ansible-labs
 vi tags.yaml
 ```
 ```
-- name: Task Demonstration
+- name: Tags Demonstration - Check Only
   hosts: localhost
   become: yes
   tasks:
-    - name: Check if target directory exists
+    - name: Check if file '/tmp/file1.txt' exists
       stat:
-        path: /tmp/target_directory
-      register: target_dir
+        path: /tmp/file1.txt
+      register: file1_status
+      tags: check_file1
+
+    - name: Check if file '/tmp/file2.txt' exists
+      stat:
+        path: /tmp/file2.txt
+      register: file2_status
+      tags: check_file2
+
+    - name: Check if directory '/tmp/mydir' exists
+      stat:
+        path: /tmp/mydir
+      register: dir_status
       tags: check_directory
 
-    - name: Create directory if not present
-      file:
-        path: /tmp/target_directory
-        state: directory
-        mode: '0755'
-      when: not target_dir.stat.exists
-      tags: create_directory
-
-    - name: Copy sample file if directory exists
-      copy:
-        content: "This is a sample file content."
-        dest: /tmp/target_directory/sample_file.txt
-      when: target_dir.stat.exists
-      tags: copy_file
-
-    - name: Check if user 'exampleuser' exists
-      command: id -u exampleuser
-      register: user_exists
-      failed_when: user_exists.rc == 0
+    - name: Check if user 'testuser' exists
+      command: id -u testuser
+      register: user_status
+      failed_when: user_status.rc == 1
       changed_when: false
       tags: check_user
 
-    - name: Create user 'exampleuser' if not exists
-      user:
-        name: exampleuser
-        state: present
-      when: user_exists.rc != 0
-      tags: create_user
+```
+Running Specific Tasks Using Tags
+```
+ansible-playbook tags.yaml --tags "check_file1"
+```
+Running Multiple Tags Together
+```
+ansible-playbook tags.yaml --tags "check_file1,check_file2"
+```
+Skipping Specific Tasks Using --skip-tags
+```
+ansible-playbook tags.yaml --skip-tags "check_user"
+```
+Skipping Multiple Tasks Using --skip-tags
+```
+ansible-playbook tags.yaml --skip-tags "check_file1,check_directory"
+```
+Starting from a Specific Task Using --start-at-task
+```
+ansible-playbook tags.yaml --start-at-task "Check if directory '/tmp/mydir' exists"
 ```
 
-Run Task with check_directory Tag
-```
-ansible-playbook tags.yaml --tags "check_directory"
-```
-Run Task with create_directory Tag
-```
-ansible-playbook tags.yaml --tags "create_directory"
-```
-Run Task with copy_file Tag
-```
-ansible-playbook tags.yaml --tags "copy_file"
-```
-Run Task with check_user Tag
-```
-ansible-playbook tags.yaml --tags "check_user"
-```
-Run Task with create_user Tag
-```
-ansible-playbook tags.yaml --tags "create_user"
-```
-Run Multiple Tags Together
-```
-ansible-playbook tags.yaml --tags "check_directory,create_directory,copy_file"
-```
-You can also skip specific tasks by using the --skip-tags option. This is useful if you want to run all tasks except certain ones.
-```
-ansible-playbook tags.yaml --skip-tags "create_user"
-```
-If you want to skip the first task (Check if target directory exists) and start from the Create directory if not present task, use:
-```
-ansible-playbook tags.yaml --start-at-task "Check if user 'exampleuser' exists"
 
-```
