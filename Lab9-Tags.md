@@ -34,7 +34,7 @@ vi tags.yaml
     - name: Check if user 'testuser' exists
       command: id -u testuser
       register: user_status
-      failed_when: user_status.rc == 1
+      failed_when: false
       changed_when: false
       tags: check_user
 
