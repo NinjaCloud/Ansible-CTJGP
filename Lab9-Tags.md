@@ -71,13 +71,13 @@ ansible-playbook tags.yaml --tags "create_user"
 ```
 Run Multiple Tags Together
 ```
-ansible-playbook tags.yaml --tags "check_directory,create_directory,check_user"
+ansible-playbook tags.yaml --tags "check_directory,create_directory,copy_file"
 ```
 You can also skip specific tasks by using the --skip-tags option. This is useful if you want to run all tasks except certain ones.
 ```
-ansible-playbook tags.yaml --skip-tags "check_user"
+ansible-playbook tags.yaml --skip-tags "create_user"
 ```
 If you want to skip the first task (Check if target directory exists) and start from the Create directory if not present task, use:
 ```
-ansible-playbook tags.yaml --start-at-task
+ansible-playbook tags.yaml --start-at-task "check_user"
 ```
