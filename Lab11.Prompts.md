@@ -28,7 +28,9 @@ Execute the playbook & you will be prompt for enter the package name which you w
 ```
 ansible-playbook promptlab.yml
 ```
-Verify if the specified package httpd is installed. SSH into one of the machines and verify using the command
+![image](https://github.com/user-attachments/assets/f3911e22-b311-489b-8580-d2af2aba1810)
+
+Verify if the specified package is installed. SSH into one of the machines and verify using the command
 ```
 ssh ec2-user@< managed_node_private_ip >
 ```
