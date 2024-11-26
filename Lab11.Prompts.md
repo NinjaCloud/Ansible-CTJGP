@@ -32,9 +32,3 @@ Verify if the specified package httpd is installed. SSH into one of the machines
 ```
 ssh ec2-user@< managed_node_private_ip >
 ```
-```
-rpm -qa | grep httpd
-```
-```
-ansible all -m "command" -a "rpm -qa | grep httpd"
-```
