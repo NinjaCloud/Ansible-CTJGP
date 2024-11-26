@@ -30,7 +30,10 @@ Execute the playbook Notice the output of the command is shown along with the An
 ```
 ansible-playbook untillab.yml
 ```
-Login to the managed node from another window and start the httpd service You can use the same key (as used for CN) to login to managed node
+Since the httpd server is only installed and not  started second task would be performed 5 times
+![image](https://github.com/user-attachments/assets/7b3edf6c-6c02-4e79-b154-a9ecdc71981c)
+
+Login to any one of managed node and start the httpd service.
 ```
 ssh ec2-user@< managed_node_private_ip >
 ```
@@ -41,3 +44,9 @@ You can check the status of httpd by
 ```
 sudo service httpd status
 ```
+```
+exit
+```
+Execute the playbook again.  You would notice the second task is getting performed 5 times son the other node, but on this node, it runs successfully.
+![image](https://github.com/user-attachments/assets/2ea25894-a409-4902-8367-87527bd4fd91)
+
