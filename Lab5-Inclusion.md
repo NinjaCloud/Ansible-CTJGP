@@ -28,7 +28,6 @@ vi first.yml
 ```
 ---
 - hosts: all
-  gather_facts: no
   become: yes
   tasks:
   - name: install common packages
@@ -53,7 +52,6 @@ vi second.yml
 ```
 ---
 - hosts: all
-  gather_facts: no
   become: yes
   tasks:
     - name: install common packages
