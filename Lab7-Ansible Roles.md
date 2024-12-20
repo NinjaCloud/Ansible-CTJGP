@@ -94,7 +94,7 @@ Add the given content, by pressing "INSERT"
 
 - name: uploading default index.html for host
   copy:
-     src: /home/ec2-user/role-labs/webrole/files/index.html
+     src: /home/ec2-user/ansible-labs/role-labs/webrole/files/index.html
      dest: /var/www/html
 
 - name: Setting up attributes for file
